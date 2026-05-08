@@ -68,7 +68,7 @@ export default function Home() {
                 {c.home_welcome_cta}
               </Link>
             </AnimatedSection>
-            <AnimatedSection delay={150}>
+            <AnimatedSection delay={150} className="hidden lg:block">
               <img
                 src={c.home_welcome_image}
                 data-cms="Home - Welcome - Image"
