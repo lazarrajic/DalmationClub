@@ -81,16 +81,16 @@ export default function Home() {
       </section>
 
       {/* ── Stats Bar ── */}
-      <section className="bg-white py-14 border-y border-border">
+      <section className="bg-blue py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               {c.home_stats.map((stat, i) => (
                 <div key={stat.label} className="text-center">
-                  <p data-cms={`Home - Stats - Value ${i + 1}`} className="font-heading text-blue text-2xl md:text-3xl font-bold mb-2">
+                  <p data-cms={`Home - Stats - Value ${i + 1}`} className="font-heading text-white text-2xl md:text-3xl font-bold mb-2">
                     {stat.value}
                   </p>
-                  <p data-cms={`Home - Stats - Label ${i + 1}`} className="text-secondary text-sm leading-snug">
+                  <p data-cms={`Home - Stats - Label ${i + 1}`} className="text-white/70 text-sm leading-snug">
                     {stat.label}
                   </p>
                 </div>

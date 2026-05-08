@@ -35,8 +35,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
-            <img src={c.logo} data-cms="Nav - Nav - Logo" alt="Dalmatian Cultural Society" className="h-14 w-auto object-contain" />
+          <Link to="/" className="flex-shrink-0 flex items-center gap-3">
+            <img src={c.logo_shield} data-cms="Nav - Nav - Logo" alt="Dalmatian Cultural Society" className="h-10 w-auto" />
+            <div className="hidden sm:block">
+              <p className="font-heading text-blue text-base leading-tight">Dalmatian Cultural Society</p>
+              <p className="font-body text-muted text-xs tracking-wide">Dalmatinsko Kulturno Drustvo</p>
+            </div>
           </Link>
 
           {/* Desktop nav */}
