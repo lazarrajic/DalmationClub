@@ -10,19 +10,27 @@ const links = [
   { to: '/contact', label: 'Contact' },
 ]
 
+// Pages with a dark hero image where the nav can float transparently
+const darkHeroPages = ['/', '/about', '/culture', '/venue']
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const location = useLocation()
 
+  const hasDarkHero = darkHeroPages.includes(location.pathname)
+  const transparent = !scrolled && hasDarkHero
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10)
+    const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
     setOpen(false)
+    // Re-check scroll on route change
+    setScrolled(window.scrollY > 60)
   }, [location])
 
   useEffect(() => {
@@ -31,15 +39,24 @@ export default function Navbar() {
   }, [open])
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md' : ''}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      transparent
+        ? 'bg-transparent'
+        : 'bg-white shadow-md'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
+
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-3">
             <img src={c.logo_shield} data-cms="Nav - Nav - Logo" alt="Dalmatian Cultural Society" className="h-10 w-auto" />
             <div className="hidden sm:block">
-              <p className="font-heading text-blue text-base leading-tight">Dalmatian Cultural Society</p>
-              <p className="font-body text-muted text-xs tracking-wide">Dalmatinsko Kulturno Drustvo</p>
+              <p className={`font-heading text-base leading-tight transition-colors duration-300 ${transparent ? 'text-white' : 'text-blue'}`}>
+                Dalmatian Cultural Society
+              </p>
+              <p className={`font-body text-xs tracking-wide transition-colors duration-300 ${transparent ? 'text-white/70' : 'text-muted'}`}>
+                Dalmatinsko Kulturno Drustvo
+              </p>
             </div>
           </Link>
 
@@ -50,9 +67,11 @@ export default function Navbar() {
                 key={l.to}
                 to={l.to}
                 className={`font-body text-sm font-semibold transition-colors duration-200 ${
-                  location.pathname === l.to
-                    ? 'text-blue border-b-2 border-blue pb-0.5'
-                    : 'text-[#1A1A1A] hover:text-blue'
+                  transparent
+                    ? 'text-white/90 hover:text-white'
+                    : location.pathname === l.to
+                      ? 'text-blue border-b-2 border-blue pb-0.5'
+                      : 'text-[#1A1A1A] hover:text-blue'
                 }`}
               >
                 {l.label}
@@ -60,7 +79,11 @@ export default function Navbar() {
             ))}
             <Link
               to="/contact"
-              className="ml-4 bg-blue hover:bg-blue-hover text-white font-body font-semibold text-sm px-5 py-2.5 rounded-full transition-colors duration-200"
+              className={`ml-4 font-body font-semibold text-sm px-5 py-2.5 rounded-full transition-all duration-200 ${
+                transparent
+                  ? 'border-2 border-white/80 text-white hover:bg-white hover:text-blue'
+                  : 'bg-blue hover:bg-blue-hover text-white'
+              }`}
             >
               <span data-cms="Nav - Nav - CTA">{c.nav_cta}</span>
             </Link>
@@ -72,9 +95,9 @@ export default function Navbar() {
             onClick={() => setOpen(o => !o)}
             aria-label="Toggle navigation"
           >
-            <span className={`block w-6 h-0.5 bg-blue transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
-            <span className={`block w-6 h-0.5 bg-blue transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
-            <span className={`block w-6 h-0.5 bg-blue transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
+            <span className={`block w-6 h-0.5 transition-all duration-300 ${transparent ? 'bg-white' : 'bg-blue'} ${open ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`block w-6 h-0.5 transition-all duration-300 ${transparent ? 'bg-white' : 'bg-blue'} ${open ? 'opacity-0' : ''}`} />
+            <span className={`block w-6 h-0.5 transition-all duration-300 ${transparent ? 'bg-white' : 'bg-blue'} ${open ? '-rotate-45 -translate-y-2' : ''}`} />
           </button>
         </div>
       </div>
