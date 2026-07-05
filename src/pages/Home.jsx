@@ -84,13 +84,15 @@ export default function Home() {
       <section className="bg-blue py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div data-cms-repeater="Home - Stats" data-cms-shape="stat"
+              data-cms-min="2" data-cms-recommend="4" data-cms-max="8" data-cms-overflow="wrap"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               {c.home_stats.map((stat, i) => (
                 <div key={stat.label} className="text-center">
-                  <p data-cms={`Home - Stats - Value ${i + 1}`} className="font-heading text-white text-2xl md:text-3xl font-bold mb-2">
+                  <p data-cms-field="value" className="font-heading text-white text-2xl md:text-3xl font-bold mb-2">
                     {stat.value}
                   </p>
-                  <p data-cms={`Home - Stats - Label ${i + 1}`} className="text-white/70 text-sm leading-snug">
+                  <p data-cms-field="label" className="text-white/70 text-sm leading-snug">
                     {stat.label}
                   </p>
                 </div>
