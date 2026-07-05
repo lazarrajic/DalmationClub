@@ -103,11 +103,13 @@ export default function Venue() {
               {c.venue_occasions_heading}
             </h2>
             <div className="w-12 h-1 bg-blue mx-auto mb-8" />
-            <div className="flex flex-wrap justify-center gap-3">
+            <div data-cms-repeater="Venue - Occasions" data-cms-shape="chip"
+              data-cms-min="4" data-cms-max="12" data-cms-overflow="wrap"
+              className="flex flex-wrap justify-center gap-3">
               {c.venue_occasions.map((occ, i) => (
                 <span
                   key={occ.title}
-                  data-cms={`Venue - Occasions - Title ${i + 1}`}
+                  data-cms-field="title"
                   className="px-5 py-2.5 bg-blue-tint text-blue rounded-full text-sm font-semibold border border-blue/20"
                 >
                   {occ.title}
